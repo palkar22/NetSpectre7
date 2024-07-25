@@ -16,7 +16,7 @@ class PacketPrioritizer(nn.Module):
         x = self.relu(self.fc1(lstm_out[:, -1, :]))
         return self.fc2(x)
 
-def train_model(model, train_loader, num_epochs=50):
+def train_model(model, train_loader, device, num_epochs=50):
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters())
     
@@ -24,6 +24,7 @@ def train_model(model, train_loader, num_epochs=50):
         model.train()
         total_loss = 0
         for inputs, labels in train_loader:
+            inputs, labels = inputs.to(device), labels.to(device)
             optimizer.zero_grad()
             outputs = model(inputs)
             loss = criterion(outputs, labels)
@@ -50,17 +51,21 @@ def prepare_data(X, y):
     return DataLoader(dataset, batch_size=32, shuffle=True)
 
 def main():
+    # Check if CUDA is available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device}")
+
     # Load the dataset
     X, y = torch.load('packet_dataset.pt')
     
     # Prepare data
     train_loader = prepare_data(X, y)
     
-    # Initialize the model
-    model = PacketPrioritizer()
+    # Initialize the model and move it to GPU
+    model = PacketPrioritizer().to(device)
     
     # Train the model
-    train_model(model, train_loader)
+    train_model(model, train_loader, device)
     
     # Save the trained model
     torch.save(model.state_dict(), 'packet_prioritizer.pth')
