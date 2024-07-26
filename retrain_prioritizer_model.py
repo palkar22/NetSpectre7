@@ -3,6 +3,10 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 
+# globals
+PTH_FILENAME = None
+
+
 class PacketPrioritizer(nn.Module):
     def __init__(self):
         super().__init__()
@@ -49,12 +53,15 @@ def prepare_data(X, y):
     return DataLoader(dataset, batch_size=32, shuffle=True)
 
 def main():
+    global PTH_FILENAME
+    PTH_FILENAME = input("Enter the previously trained model .pt file name:")
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
     # Load the pre-trained model
     model = PacketPrioritizer()
-    model.load_state_dict(torch.load('packet_prioritizer.pth'))
+    model.load_state_dict(torch.load(PTH_FILENAME))
     model.to(device)
     print("Pre-trained model loaded successfully.")
 
@@ -68,10 +75,16 @@ def main():
     print("Starting additional training...")
     train_model(model, train_loader, device)
     
+    # Generate timestamp
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # updated PTH model's filename
+    new_PTH_FILENAME = f"packet_prioritizer_{timestamp}.onnx"
+
     # Save the updated model
-    torch.save(model.state_dict(), 'packet_prioritizer_updated.pth')
+    torch.save(model.state_dict(), new_PTH_FILENAME)
     
-    print("Model retrained and saved successfully as packet_prioritizer_updated.pth")
+    print(f"Model retrained and saved successfully as {new_PTH_FILENAME}")
 
 if __name__ == "__main__":
     main()

@@ -8,7 +8,7 @@ import time
 # Constants
 SEQUENCE_LENGTH = 5
 NUM_FEATURES = 10
-CAPTURE_DURATION = 3000  # Capture for 50 minutes
+CAPTURE_DURATION = 1800  # Capture for 30 minutes
 
 def extract_features(packet):
     features = [0] * NUM_FEATURES
