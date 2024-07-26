@@ -4,12 +4,13 @@ import torch
 import numpy as np
 from collections import deque
 import time
+import subprocess
+import datetime
 
 # Constants
 SEQUENCE_LENGTH = 5
 NUM_FEATURES = 10
-CAPTURE_DURATION = 1800  # Capture for 30 minutes
-
+CAPTURE_DURATION = None  # Capture for 3 hrs
 def extract_features(packet):
     features = [0] * NUM_FEATURES
 
@@ -38,20 +39,42 @@ def extract_features(packet):
 
 def classify_packet(packet):
     if IP in packet:
-        if packet[IP].dport == 53 or packet[IP].sport == 53:  # DNS
+        if TCP in packet:
+            dport = packet[TCP].dport
+            sport = packet[TCP].sport
+        elif UDP in packet:
+            dport = packet[UDP].dport
+            sport = packet[UDP].sport
+        else:
+            return 'Normal'  # Neither TCP nor UDP
+
+        if dport == 53 or sport == 53:  # DNS
             return 'Real Time'
-        elif TCP in packet and packet[TCP].dport in [80, 443]:  # HTTP/HTTPS
+        elif dport in [80, 443]:  # HTTP/HTTPS
             return 'Web download'
-        elif UDP in packet and packet[UDP].dport in [3074, 3075]:  # Xbox Live
+        elif dport in [3074, 3075]:  # Xbox Live
             return 'Games'
-        elif TCP in packet and packet[TCP].dport in [1935, 1936, 5222]:  # RTMP, XMPP
+        elif dport in [1935, 1936, 5222]:  # RTMP, XMPP
             return 'Streaming'
-        elif TCP in packet and packet[TCP].dport == 22:  # SSH
+        elif dport == 22:  # SSH
             return 'Real Time'
-        elif UDP in packet and packet[UDP].dport in [123]:  # NTP
+        elif dport in [123]:  # NTP
             return 'Real Time'
     
     return 'Normal'  # Default classification
+def get_wifi_interface():
+    try:
+        # Run netsh command to get WiFi interface information
+        result = subprocess.run(["netsh", "wlan", "show", "interfaces"], capture_output=True, text=True)
+        output = result.stdout
+
+        # Parse the output to find the name of the connected WiFi interface
+        for line in output.split('\n'):
+            if "Name" in line:
+                return line.split(':')[1].strip()
+    except Exception as e:
+        print(f"Error getting WiFi interface: {e}")
+    return None
 
 def capture_packets(interface):
     packet_buffer = deque(maxlen=SEQUENCE_LENGTH)
@@ -78,7 +101,17 @@ def capture_packets(interface):
     return np.array(features_list), labels
 
 def main():
-    interface = "eth0"  # Change this to your Ethernet interface name
+
+    global CAPTURE_DURATION
+    print("5 min = 300 sec\n10min = 600 sec\n1hr=3600sec\n")
+    CAPTURE_DURATION = int(input("Enter Capture Duration in seconds:"))
+
+    interface = get_wifi_interface()
+    if not interface:
+        print("Could not find WiFi interface. Please check your network connections.")
+        return
+
+    print(f"Using WiFi interface: {interface}")
     
     X, y = capture_packets(interface)
     
@@ -86,8 +119,12 @@ def main():
     X_tensor = torch.FloatTensor(X)
     y_list = y  # Keep y as a list of strings
     
+
+     # Generate timestamp
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
     # Save the dataset
-    torch.save((X_tensor, y_list), 'packet_dataset.pt')
+    torch.save((X_tensor, y_list), f'packet_dataset_{timestamp}_{CAPTURE_DURATION}.pt')
     
     print(f"Dataset saved. Shape: {X_tensor.shape}, Labels: {len(y_list)}")
 

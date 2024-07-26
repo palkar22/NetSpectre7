@@ -2,10 +2,11 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
+from os.path import isfile
 
 # globals
 PTH_FILENAME = None
-
+newDatasetName = None
 
 class PacketPrioritizer(nn.Module):
     def __init__(self):
@@ -53,8 +54,17 @@ def prepare_data(X, y):
     return DataLoader(dataset, batch_size=32, shuffle=True)
 
 def main():
-    global PTH_FILENAME
-    PTH_FILENAME = input("Enter the previously trained model .pt file name:")
+    global PTH_FILENAME, newDatasetName
+    
+    while True:
+        PTH_FILENAME = input("Enter the previously trained model (.pth) file name:")
+        if isfile(PTH_FILENAME) == True:
+            newDatasetName = input("Enter the training dataset (.pt) file name:")
+            if isfile(newDatasetName) == True:
+                break
+        else:
+            print("File doesnt exist. Retry.")
+    
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
@@ -66,7 +76,7 @@ def main():
     print("Pre-trained model loaded successfully.")
 
     # Load the new dataset
-    X, y = torch.load('packet_dataset.pt')
+    X, y = torch.load(newDatasetName)
     
     # Prepare data
     train_loader = prepare_data(X, y)
@@ -79,7 +89,7 @@ def main():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # updated PTH model's filename
-    new_PTH_FILENAME = f"packet_prioritizer_{timestamp}.onnx"
+    new_PTH_FILENAME = f"packet_prioritizer_{timestamp}.pth"
 
     # Save the updated model
     torch.save(model.state_dict(), new_PTH_FILENAME)

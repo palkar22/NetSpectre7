@@ -15,7 +15,12 @@ def quantize_onnx_model(model_path, quantized_model_path):
     print(f"Model quantized and saved to {quantized_model_path}")
 
 if __name__ == "__main__":
-    original_model = "packet_prioritizer.onnx"
-    quantized_model = "packet_prioritizer_quantized.onnx"
-    
+    while True:
+        original_model = input("Enter the previously trained model (.pth) file name:")
+        if isfile(original_model) == True:
+            break
+        else:
+            print("File doesnt exist. Retry.")
+
+    quantized_model = "quantized_" + original_model
     quantize_onnx_model(original_model, quantized_model)
