@@ -20,6 +20,7 @@ def main(PTH_FILENAME):
 
     
     # Load the pre-trained model
+    
     model = PacketPrioritizer()
 
     try:
