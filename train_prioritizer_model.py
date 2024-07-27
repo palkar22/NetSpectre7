@@ -102,4 +102,5 @@ def main(datasetName):
     print("Model trained and saved successfully.")
 
 if __name__ == "__main__":
-    main(argv[1])
+    file = argv[1] if len(argv) > 1 else None
+    main(file)
