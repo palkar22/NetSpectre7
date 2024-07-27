@@ -3,11 +3,8 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 from os.path import isfile
-<<<<<<< HEAD
 import datetime
-=======
 from sys import argv
->>>>>>> 91bdd90e5690c85b5dc5a1d53e5e5bf05b2defd5
 
 # globals
 PTH_FILENAME = None
@@ -60,13 +57,13 @@ def prepare_data(X, y):
 
 def main(pth_file, datasetName):
     global PTH_FILENAME, newDatasetName
-    if pth_file == None && datasetName == None:
+    if pth_file == None and datasetName == None:
         while True:
             if pth_file == None:
                 PTH_FILENAME = input("Enter the previously trained model (.pth) file name:")
             if datasetName == None:
                 newDatasetName = input("Enter the training dataset (.pt) file name:")
-            if isfile(PTH_FILENAME) == True && isfile(newDatasetName) == True:
+            if isfile(PTH_FILENAME) == True and isfile(newDatasetName) == True:
                 break
             else:
                 print("File doesnt exist. Retry.")
