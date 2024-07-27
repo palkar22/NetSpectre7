@@ -103,7 +103,7 @@ def capture_packets(interface):
 def main():
 
     global CAPTURE_DURATION
-    print("5 min = 300 sec\n10min = 600 sec\n1hr=3600sec\n")
+    print("5 min = 300 sec\n10min = 600 sec\n1hr = 3600sec\n")
     CAPTURE_DURATION = int(input("Enter Capture Duration in seconds:"))
 
     interface = get_wifi_interface()
