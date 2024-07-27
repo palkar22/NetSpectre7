@@ -1,7 +1,7 @@
 import torch
 import torch.onnx
 from train_prioritizer_model import PacketPrioritizer
-
+import datetime
 
 # ... (keep all your existing imports and class definitions)
 
@@ -29,10 +29,16 @@ def main():
     # Create a dummy input tensor
     dummy_input = torch.randn(1, 10, 10)  # Adjust size based on your input shape (batch_size, sequence_length, input_size)
     
+    # Generate timestamp
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Create ONNX filename with timestamp
+    onnx_filename = f"packet_prioritizer_{timestamp}.onnx"
+    
     # Export the model
     torch.onnx.export(model,               # model being run
                       dummy_input,         # model input (or a tuple for multiple inputs)
-                      "packet_prioritizer.onnx",  # where to save the model
+                      onnx_filename,       # where to save the model
                       export_params=True,  # store the trained parameter weights inside the model file
                       opset_version=11,    # the ONNX version to export the model to
                       do_constant_folding=True,  # whether to execute constant folding for optimization
@@ -41,7 +47,7 @@ def main():
                       dynamic_axes={'input' : {0 : 'batch_size'},    # variable length axes
                                     'output' : {0 : 'batch_size'}})
     
-    print("Model converted to ONNX format and saved as packet_prioritizer.onnx")
+    print(f"Model converted to ONNX format and saved as {onnx_filename}")
 
 if __name__ == "__main__":
     main()
