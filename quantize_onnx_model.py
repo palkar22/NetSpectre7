@@ -1,6 +1,7 @@
 import onnx
 from onnxruntime.quantization import quantize_dynamic, QuantType
 from sys import argv
+from os.path import isfile
 
 def quantize_onnx_model(model_path, quantized_model_path):
     # Load the ONNX model
@@ -26,8 +27,14 @@ def main(original_model):
             else:
                 print("File doesnt exist. Retry.")
 
-    quantized_model = "quantized_" + original_model
+    # string manipulation to get filename for quantized model
+    original_model = original_model[2:]
+    quantized_model_list = original_model.split("_")
+    quantized_model_list.insert(0,"quantized")
+    quantized_model = "_".join(quantized_model_list)
+
     quantize_onnx_model(original_model, quantized_model)
 
 if __name__ == "__main__":
-    main(argv[1])
+    file = argv[1] if len(argv) > 1 else None
+    main(file)

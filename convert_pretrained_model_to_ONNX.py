@@ -32,7 +32,7 @@ def main(PTH_FILENAME):
     model.eval()  # Set the model to evaluation mode
     
     # Create a dummy input tensor on the same device as the model
-    dummy_input = torch.randn(5, 15, 15, device=device)  # Adjust size based on input shape (batch_size, sequence_length, input_size)
+    dummy_input = torch.randn(1, 10, 10, device=device)  # Adjust size based on input shape (batch_size, sequence_length, input_size)
     
     # Generate timestamp
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
