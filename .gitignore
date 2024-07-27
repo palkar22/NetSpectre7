@@ -61,6 +61,15 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
+
+# ONLY ON RAGHU's system 
+# ignore .pt and .pth files
+*.pt
+*.pth
+
+# vscode workspa
+*.code-workspace
+
 # Flask stuff:
 instance/
 .webassets-cache
