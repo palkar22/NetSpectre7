@@ -66,7 +66,7 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
-    X, y = torch.load('packet_dataset.pt')
+    X, y = torch.load(datasetName)
     
     # Prepare data
     train_loader = prepare_data(X, y)
