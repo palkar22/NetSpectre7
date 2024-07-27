@@ -3,7 +3,11 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 from os.path import isfile
+<<<<<<< HEAD
 import datetime
+=======
+from sys import argv
+>>>>>>> 91bdd90e5690c85b5dc5a1d53e5e5bf05b2defd5
 
 # globals
 PTH_FILENAME = None
@@ -54,17 +58,18 @@ def prepare_data(X, y):
     dataset = TensorDataset(X, y_classes)
     return DataLoader(dataset, batch_size=32, shuffle=True)
 
-def main():
+def main(pth_file, datasetName):
     global PTH_FILENAME, newDatasetName
-    
-    while True:
-        PTH_FILENAME = input("Enter the previously trained model (.pth) file name:")
-        if isfile(PTH_FILENAME) == True:
-            newDatasetName = input("Enter the training dataset (.pt) file name:")
-            if isfile(newDatasetName) == True:
+    if pth_file == None && datasetName == None:
+        while True:
+            if pth_file == None:
+                PTH_FILENAME = input("Enter the previously trained model (.pth) file name:")
+            if datasetName == None:
+                newDatasetName = input("Enter the training dataset (.pt) file name:")
+            if isfile(PTH_FILENAME) == True && isfile(newDatasetName) == True:
                 break
-        else:
-            print("File doesnt exist. Retry.")
+            else:
+                print("File doesnt exist. Retry.")
     
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -98,4 +103,4 @@ def main():
     print(f"Model retrained and saved successfully as {new_PTH_FILENAME}")
 
 if __name__ == "__main__":
-    main()
+    main(argv[1], argv[2])

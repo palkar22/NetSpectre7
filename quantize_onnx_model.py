@@ -1,5 +1,6 @@
 import onnx
 from onnxruntime.quantization import quantize_dynamic, QuantType
+from sys import argv
 
 def quantize_onnx_model(model_path, quantized_model_path):
     # Load the ONNX model
@@ -14,13 +15,19 @@ def quantize_onnx_model(model_path, quantized_model_path):
     
     print(f"Model quantized and saved to {quantized_model_path}")
 
-if __name__ == "__main__":
-    while True:
-        original_model = input("Enter the previously trained model (.pth) file name:")
-        if isfile(original_model) == True:
-            break
-        else:
-            print("File doesnt exist. Retry.")
+
+
+def main(original_model):
+    if original_model == None:
+        while True:
+            original_model = input("Enter the previously trained model (.pth) file name:")
+            if isfile(original_model) == True:
+                break
+            else:
+                print("File doesnt exist. Retry.")
 
     quantized_model = "quantized_" + original_model
     quantize_onnx_model(original_model, quantized_model)
+
+if __name__ == "__main__":
+    main(argv[1])

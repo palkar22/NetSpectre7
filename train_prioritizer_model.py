@@ -4,6 +4,9 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 import datetime
 from os.path import isfile
+from sys import argv
+
+
 
 class PacketPrioritizer(nn.Module):
     def __init__(self):
@@ -52,15 +55,15 @@ def prepare_data(X, y):
     dataset = TensorDataset(X, y_classes)
     return DataLoader(dataset, batch_size=32, shuffle=True)
 
-def main():
+def main(datasetName):
     
-    # Load the dataset
-    while True:
-        datasetName = input("Enter dataset (.pt) file name:")
-        if isfile(datasetName) == True:
-            break
-        else:
-            print("File doesnt exist. Retry.")
+    if datasetName == None:
+        while True:
+            datasetName = input("Enter the dataset (.pt) file name:")
+            if isfile(datasetName) == False:
+                print(f"File doesnt exist.{datasetName} Retry.")
+            else:
+                break
 
     # Check if CUDA is available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -91,4 +94,4 @@ def main():
     print("Model trained and saved successfully.")
 
 if __name__ == "__main__":
-    main()
+    main(argv[1])
