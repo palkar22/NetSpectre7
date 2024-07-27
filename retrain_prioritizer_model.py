@@ -66,7 +66,7 @@ def main(pth_file, datasetName):
             if isfile(PTH_FILENAME) == True and isfile(newDatasetName) == True:
                 break
             else:
-                print("File doesnt exist. Retry.")
+                print("File(s) doesnt exist. Retry.")
     
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -100,4 +100,5 @@ def main(pth_file, datasetName):
     print(f"Model retrained and saved successfully as {new_PTH_FILENAME}")
 
 if __name__ == "__main__":
-    main(argv[1], argv[2])
+    file1,file2 = None, None if len(argv) < 2 else argv[1], argv[2]
+    main(file1, file2)
