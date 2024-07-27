@@ -1,8 +1,9 @@
 import onnx
 from onnxruntime.quantization import quantize_static, CalibrationMethod, QuantType, QuantizationMode
 import numpy as np
+from os.path import isfile
 
-def generate_calibration_data(num_samples=100, input_shape=(1, 10, 10)):
+def generate_calibration_data(num_samples=100, input_shape=(5, 15, 15)):
     """
     Generate dummy calibration data.
     Adjust the input_shape based on your model's input requirements.
@@ -35,8 +36,18 @@ def quantize_onnx_model_for_npu(model_path, quantized_model_path):
     
     print(f"Model quantized for NPU and saved to {quantized_model_path}")
 
+
+def main(original_model):
+    if original_model == None:
+        while True:
+            original_model = input("Enter the previously trained model (.pth) file name:")
+            if isfile(original_model) == True:
+                break
+            else:
+                print("File doesnt exist. Retry.")
+
+    quantized_model = "quantized_" + original_model
+    quantize_onnx_model(original_model, quantized_model)
+
 if __name__ == "__main__":
-    original_model = "packet_prioritizer.onnx"
-    quantized_model = "packet_prioritizer_quantized_npu.onnx"
-    
-    quantize_onnx_model_for_npu(original_model, quantized_model)
+    main(argv[1])
