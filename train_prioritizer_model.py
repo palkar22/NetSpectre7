@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader, TensorDataset
 import datetime
 from os.path import isfile
 from sys import argv
+from torch.cuda.amp import GradScaler, autocast
 
 
 
@@ -24,17 +25,23 @@ class PacketPrioritizer(nn.Module):
 def train_model(model, train_loader, device, num_epochs=50):
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters())
+    scaler = GradScaler()
     
     for epoch in range(num_epochs):
         model.train()
         total_loss = 0
         for inputs, labels in train_loader:
-            inputs, labels = inputs.to(device), labels.to(device)
+            inputs, labels = inputs.to(device, non_blocking=True), labels.to(device, non_blocking=True)
             optimizer.zero_grad()
-            outputs = model(inputs)
-            loss = criterion(outputs, labels)
-            loss.backward()
-            optimizer.step()
+            
+            with autocast():
+                outputs = model(inputs)
+                loss = criterion(outputs, labels)
+            
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            
             total_loss += loss.item()
         
         print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {total_loss/len(train_loader):.4f}')
@@ -53,7 +60,8 @@ def prepare_data(X, y):
     
     # Create DataLoader
     dataset = TensorDataset(X, y_classes)
-    return DataLoader(dataset, batch_size=32, shuffle=True)
+    return DataLoader(dataset, batch_size=128, shuffle=True, pin_memory=True, num_workers=4)
+
 
 def main(datasetName):
     
