@@ -5,7 +5,8 @@ from torch.utils.data import DataLoader, TensorDataset
 import datetime
 from os.path import isfile
 from sys import argv
-from torch.cuda.amp import GradScaler, autocast
+from torch.cuda.amp import GradScaler
+from torch.amp import autocast
 
 
 
@@ -34,7 +35,7 @@ def train_model(model, train_loader, device, num_epochs=50):
             inputs, labels = inputs.to(device, non_blocking=True), labels.to(device, non_blocking=True)
             optimizer.zero_grad()
             
-            with autocast():
+            with autocast("cuda"):
                 outputs = model(inputs)
                 loss = criterion(outputs, labels)
             

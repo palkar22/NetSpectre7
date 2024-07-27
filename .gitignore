@@ -67,7 +67,7 @@ db.sqlite3-journal
 *.pt
 *.pth
 
-# vscode workspa
+# vscode workspace
 *.code-workspace
 
 # Flask stuff:
