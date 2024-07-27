@@ -22,10 +22,17 @@ def load_quantized_model(model_path, ep='ipu'):
     return session
 
 def extract_features(src_ip, src_port, dst_port):
-    features = np.array([int(x) for x in src_ip.split('.')] + [src_port, dst_port]).reshape(1, 1, -1).astype(np.float32)
-    if features.shape[2] < 10:
-        features = np.pad(features, ((0,0), (0,0), (0, 10 - features.shape[2])))
-    return features
+    # Convert IP and ports to features
+    features = np.array([int(x) for x in src_ip.split('.')] + [src_port, dst_port])
+    
+    # Pad or truncate to ensure we have 10 features
+    if len(features) < 10:
+        features = np.pad(features, (0, 10 - len(features)))
+    elif len(features) > 10:
+        features = features[:10]
+    
+    # Reshape to match the expected input shape [-1, 10, 10]
+    return features.reshape(1, 10, 1).repeat(10, axis=2).astype(np.float32)
 
 
 def get_priority(prediction):
