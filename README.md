@@ -47,7 +47,8 @@ Our investigation of network packet behavior during gaming sessions revealed a s
 <hr>
 The PingPilot project attempts to improve online gaming by using an intelligent data packet priority algorithm. At its core is a Recurrent Neural Network (RNN) model with Long Short-Term Memory (LSTM) that classifies network packets in real time. This approach checks the qualities of each packet, ensuring that game-critical data is handled with priority.
 
-<img  width="270" height="200" src=[https://github.com/user-attachments/assets/71142e5b-bce9-435d-bb1a-425f585c792e](https://github.com/user-attachments/assets/3f40de59-3d0c-4f54-9bc7-a77514dc0532)>
+![image](https://github.com/user-attachments/assets/71a78ef6-35e7-4342-9eb7-e6d9feb3300e)
+
 
 Our project is built on the smooth integration of powerful machine learning algorithms with actual gaming needs. Our LSTM RNN model, trained using PyTorch, has several major benefits:
 - Temporal Understanding: The LSTM design enables our model to grasp the context and sequence of packets, which is critical for appropriately prioritizing game state updates.
