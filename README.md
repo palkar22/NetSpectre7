@@ -1,4 +1,5 @@
 # PingPilot
+<hr>
 
 PingPilot is a desktop app designed to speed up your online gaming experience by using ML models that processes packets, only using the NPU.
 
@@ -6,6 +7,7 @@ This project is made for the 2024 AMD Pervasive AI Developer Contest, for AMD Ry
 <img align="right" width="370" height="290" src=https://github.com/user-attachments/assets/71142e5b-bce9-435d-bb1a-425f585c792e>
 
 ## Things used in this project
+<hr>
 ### Hardware components
 	
 1. Minisforum Venus UM790 Pro with AMD Ryzen™ 9
@@ -18,9 +20,11 @@ This project is made for the 2024 AMD Pervasive AI Developer Contest, for AMD Ry
 3. NVIDIA CUDA
 
 ## About our project
+<hr>
 PingPilot is a desktop program that optimizes online gaming performance by using machine learning (ML) to prioritize network packets. PingPilot, created for the 2024 AMD Pervasive AI Developer Contest, takes advantage of AMD Ryzen AI's advanced capabilities, including a Neural Processing Unit (NPU) built into the processor, to achieve efficient and effective packet management by optimizing packet prioritization. The goal is to reduce latency and improve the overall gaming experience.
 
 ## Objectives of PingPilot
+<hr>
 
 - Improve your gaming experience by prioritizing game-related network packets, reducing latency, and enhancing responsiveness.
 - Use the improved NPU capabilities of AMD Ryzen AI Processors for efficient model inference and packet processing while keeping CPU use low.
@@ -28,6 +32,7 @@ PingPilot is a desktop program that optimizes online gaming performance by using
 
 
 ## Why this Project? Origin of our idea.. 💡
+<hr>
 
 As college students and enthusiastic gamers, my team and I have directly experienced the frustration of excessive ping and latency during multiplayer games. During gameplay, we experience lag and poor gameplay performance. Because of such instances, we were unable to deliver our best performance, particularly in the last moments of a battle royale game, due to the occurrence of abrupt lag spikes. We've seen how even milliseconds of delay can spell the difference between triumph and failure. Our research revealed that this issue impacts millions of players globally, notably in developing parts of the world, where people rely on cheap cellular data for accessing internet services.
 
@@ -36,6 +41,7 @@ We discovered that previous solutions either need costly hardware upgrades or ar
 Our investigation of network packet behavior during gaming sessions revealed a serious issue. We discovered that background programs, which are constantly sending and receiving telemetry data and software updates, frequently ==consume bandwidth==. This leaves very little network resources for gaming traffic. The difficulty is exacerbated by the fact that these background operations, which are less time-sensitive, frequently take precedence over game data. This conclusion led us to believe that a sophisticated, software-based priority system is required. Using a ==machine learning model==, we can intelligently prioritize game packets over other network traffic during gameplay, making the best use of available internet resources while avoiding hardware changes.
 
 ## Solution Concept:
+<hr>
 The PingPilot project attempts to improve online gaming by using an intelligent data packet priority algorithm. At its core is a Recurrent Neural Network (RNN) model with Long Short-Term Memory (LSTM) that classifies network packets in real time. This approach checks the qualities of each packet, ensuring that game-critical data is handled with priority.
 
 <img  width="270" height="200" src=[https://github.com/user-attachments/assets/71142e5b-bce9-435d-bb1a-425f585c792e](https://github.com/user-attachments/assets/3f40de59-3d0c-4f54-9bc7-a77514dc0532)>
@@ -47,6 +53,7 @@ Our project is built on the smooth integration of powerful machine learning algo
 - Game-agnostic Approach: Unlike game-specific improvements, our technique is applicable across multiple titles and genres.
 
 ## Development Process:
+<hr>
 
 We conducted significant research on existing packet prioritization strategies. This included research into Quality of Service (QoS) protocols, traffic shaping techniques, and machine learning methods to network management. Our findings demonstrated the potential of deep learning for real-time packet classification.
 
@@ -231,6 +238,7 @@ After training the model we exported it to ONNX (.onnx) model format and quantiz
 <iframe title="vimeo-player" src="https://player.vimeo.com/video/993015902?h=943db17ef1" width="640" height="360" frameborder="0"    allowfullscreen></iframe>
 
 ## Development Progress: Project Implementation
+<hr>
 The PingPilot Project consists of 3 main components:
 - Packet Interceptor
 - AI Inference Engine (running on AMD Ryzen AI NPU)
@@ -246,6 +254,7 @@ The Packet Scheduler component is currently a work in progress. This crucial pie
 Unfortunately, due to several technical difficulties that resulted from implementing it on our Windows-based host system, we could not complete development of the Packet Scheduler before the deadline 😭.
 
 ## Development Progress: Project Validation
+<hr>
 Given the project's present status, our validation procedure has concentrated on the completed components.
 
 ==Packet Interceptor Validation:== We tested the interceptor's ability to capture packets under a variety of network settings and game types. Metrics include the capture rate, processing speed, and feature extraction accuracy.
@@ -255,6 +264,7 @@ Given the project's present status, our validation procedure has concentrated on
 ==Preliminary end-to-end testing:== While the Packet Scheduler is not yet complete, we have conducted preliminary experiments integrating the Packet Interceptor and AI Inference Engine.
 
 ## Validation Plans:
+<hr>
 
 Once the ==Packet Scheduler== is completed, we want to do full end-to-end testing, including:
 - Real-world gaming settings.
@@ -263,6 +273,7 @@ Once the ==Packet Scheduler== is completed, we want to do full end-to-end testin
 Our preliminary findings are encouraging, demonstrating excellent packet classification accuracy and negligible overhead from our interception and processing pipeline. We're pleased to finish the ==Packet Scheduler== within a few weeks and proceed to full system validation.
 
 ## Future Scope of the Project:
+<hr>
 Our immediate focus is on completing the ==Packet Scheduler== component. This will allow us complete end-to-end testing and optimization of the PingPilot system, allowing us to quantify real-world performance gains in gaming scenarios.
 
 PingPilot offers considerable promise in ==mobile gaming== because to the growing use of NPUs in smartphones and other mobile devices.
@@ -285,6 +296,7 @@ PingPilot uses the MIT Licence, an open-source licence with the utmost freedoms 
 By tackling these issues, PingPilot has the ability to expand from a gaming-focused solution to a diverse technology with applications in ==network management and optimization==. Our goal is to continue pushing the boundaries of network performance by combining AI and specialized hardware such as NPUs to create more responsive, efficient, and adaptable network environments.
 
 ## Our Team
+<hr>
 - Sneha Venkatesh
 - Raghuram Sivakumar
 - Amithav Mrithyunjay
