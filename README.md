@@ -243,9 +243,11 @@ After training the model we exported it to ONNX (.onnx) model format and quantiz
     
 '''
 
-<iframe title="vimeo-player" src="https://player.vimeo.com/video/993015902?h=943db17ef1" width="640" height="360" frameborder="0"    allowfullscreen></iframe>
+
 
 ## Development Progress: Project Implementation
+
+https://github.com/user-attachments/assets/47770b3b-4eb0-480f-995b-abeb4d8b19a0
 
 <hr>
 
