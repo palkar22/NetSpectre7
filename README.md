@@ -39,9 +39,9 @@ PingPilot is a desktop program that optimizes online gaming performance by using
 
 As college students and enthusiastic gamers, my team and I have directly experienced the frustration of excessive ping and latency during multiplayer games. During gameplay, we experience lag and poor gameplay performance. Because of such instances, we were unable to deliver our best performance, particularly in the last moments of a battle royale game, due to the occurrence of abrupt lag spikes. We've seen how even milliseconds of delay can spell the difference between triumph and failure. Our research revealed that this issue impacts millions of players globally, notably in developing parts of the world, where people rely on cheap cellular data for accessing internet services.
 
-We discovered that previous solutions either need costly hardware upgrades or are restricted to specific titles. This prompted us to ask: Could we develop a ==software-based approach== that works across ==several games== and ==network conditions==?
+We discovered that previous solutions either need costly hardware upgrades or are restricted to specific titles. This prompted us to ask: Could we develop a ***software-based approach*** that works across ***several games*** and ***network conditions***?
 
-Our investigation of network packet behavior during gaming sessions revealed a serious issue. We discovered that background programs, which are constantly sending and receiving telemetry data and software updates, frequently ==consume bandwidth==. This leaves very little network resources for gaming traffic. The difficulty is exacerbated by the fact that these background operations, which are less time-sensitive, frequently take precedence over game data. This conclusion led us to believe that a sophisticated, software-based priority system is required. Using a ==machine learning model==, we can intelligently prioritize game packets over other network traffic during gameplay, making the best use of available internet resources while avoiding hardware changes.
+Our investigation of network packet behavior during gaming sessions revealed a serious issue. We discovered that background programs, which are constantly sending and receiving telemetry data and software updates, frequently ***consume bandwidth***. This leaves very little network resources for gaming traffic. The difficulty is exacerbated by the fact that these background operations, which are less time-sensitive, frequently take precedence over game data. This conclusion led us to believe that a sophisticated, software-based priority system is required. Using a ***machine learning model***, we can intelligently prioritize game packets over other network traffic during gameplay, making the best use of available internet resources while avoiding hardware changes.
 
 ## Solution Concept:
 <hr>
@@ -65,7 +65,7 @@ Our project is built on the smooth integration of powerful machine learning algo
 
 We conducted significant research on existing packet prioritization strategies. This included research into Quality of Service (QoS) protocols, traffic shaping techniques, and machine learning methods to network management. Our findings demonstrated the potential of deep learning for real-time packet classification.
 
-== AI Model Design and Training: == Based on our findings, we created an LSTM RNN (recurrent neural network) model for packet prioritization. The model design is defined in the PacketPrioritizer class.
+*** AI Model Design and Training: *** Based on our findings, we created an LSTM RNN (recurrent neural network) model for packet prioritization. The model design is defined in the PacketPrioritizer class.
 
 '''python 
 
@@ -98,7 +98,7 @@ This model takes sequences of packet features as input and outputs priority clas
         features = extract_features(packet)
         packet_buffer.append(features)
 
-        if len(packet_buffer) == SEQUENCE_LENGTH:
+        if len(packet_buffer) *** SEQUENCE_LENGTH:
             features_list.append(list(packet_buffer))
             labels.append(classify_packet(packet))
 
@@ -237,7 +237,7 @@ After training the model we exported it to ONNX (.onnx) model format and quantiz
 
     print(f"ONNX Model quantized and saved as {quantized_model}")
 
-      if __name__ == "__main__":
+      if __name__ *** "__main__":
         PTH_FILENAME = argv[1] if len(argv) > 1 else None
         main(PTH_FILENAME)
     
@@ -269,46 +269,46 @@ Unfortunately, due to several technical difficulties that resulted from implemen
 
 Given the project's present status, our validation procedure has concentrated on the completed components.
 
-==Packet Interceptor Validation:== We tested the interceptor's ability to capture packets under a variety of network settings and game types. Metrics include the capture rate, processing speed, and feature extraction accuracy.
+***Packet Interceptor Validation:*** We tested the interceptor's ability to capture packets under a variety of network settings and game types. Metrics include the capture rate, processing speed, and feature extraction accuracy.
 
-==AI Model Performance:== We have extensively tested the accuracy of our LSTM model in classifying packet priorities. Benchmarks include classification accuracy, inference speed on the AMD Ryzen AI NPU, and model robustness in various game settings.
+***AI Model Performance:*** We have extensively tested the accuracy of our LSTM model in classifying packet priorities. Benchmarks include classification accuracy, inference speed on the AMD Ryzen AI NPU, and model robustness in various game settings.
 
-==Preliminary end-to-end testing:== While the Packet Scheduler is not yet complete, we have conducted preliminary experiments integrating the Packet Interceptor and AI Inference Engine.
+***Preliminary end-to-end testing:*** While the Packet Scheduler is not yet complete, we have conducted preliminary experiments integrating the Packet Interceptor and AI Inference Engine.
 
 ## Validation Plans:
 
 <hr>
 
-Once the ==Packet Scheduler== is completed, we want to do full end-to-end testing, including:
+Once the ***Packet Scheduler*** is completed, we want to do full end-to-end testing, including:
 - Real-world gaming settings.
 - Comparative investigation with and without PingPilot, including user experience studies with a varied range of gamers.
 
-Our preliminary findings are encouraging, demonstrating excellent packet classification accuracy and negligible overhead from our interception and processing pipeline. We're pleased to finish the ==Packet Scheduler== within a few weeks and proceed to full system validation.
+Our preliminary findings are encouraging, demonstrating excellent packet classification accuracy and negligible overhead from our interception and processing pipeline. We're pleased to finish the ***Packet Scheduler*** within a few weeks and proceed to full system validation.
 
 ## Future Scope of the Project:
 
 <hr>
 
-Our immediate focus is on completing the ==Packet Scheduler== component. This will allow us complete end-to-end testing and optimization of the PingPilot system, allowing us to quantify real-world performance gains in gaming scenarios.
+Our immediate focus is on completing the ***Packet Scheduler*** component. This will allow us complete end-to-end testing and optimization of the PingPilot system, allowing us to quantify real-world performance gains in gaming scenarios.
 
-PingPilot offers considerable promise in ==mobile gaming== because to the growing use of NPUs in smartphones and other mobile devices.
+PingPilot offers considerable promise in ***mobile gaming*** because to the growing use of NPUs in smartphones and other mobile devices.
 - We intend to create a lighter version of our LSTM model specifically for mobile NPUs, balancing performance and power economy.
 - By tailoring our packet prioritizing to cellular network characteristics, we may help alleviate problems such as high latency and poor network performance in mobile networks.
 
-PingPilot technology has intriguing uses in ==data centers==.
+PingPilot technology has intriguing uses in ***data centers***.
 - By installing our AI-powered packet prioritization at data center gateways, we can greatly increase overall network performance and throughput.
 - The system could be modified to intelligently spread network loads between servers, hence improving resource utilization.
 - In multi-tenant situations, our solution can assure fair resource allocation while maintaining service level agreements for various clients or applications.
 
-We plan to collaborate with ==game engine developers== to integrate PingPilot, enabling precise packet prioritizing based on game-specific data.
+We plan to collaborate with ***game engine developers*** to integrate PingPilot, enabling precise packet prioritizing based on game-specific data.
 
-Optimizing PingPilot for ==cloud gaming systems== can improve streaming quality, reduce latency, and improve responsiveness.
+Optimizing PingPilot for ***cloud gaming systems*** can improve streaming quality, reduce latency, and improve responsiveness.
 
 Adapting technology to VR/AR/Metaverse applications with high bandwidth and low latency can enhance user experience.
 
 PingPilot uses the MIT Licence, an open-source licence with the utmost freedoms to read, modify and redistribute the source code, to encourage community collaboration and accelerate adoption across many platforms and use cases.
 
-By tackling these issues, PingPilot has the ability to expand from a gaming-focused solution to a diverse technology with applications in ==network management and optimization==. Our goal is to continue pushing the boundaries of network performance by combining AI and specialized hardware such as NPUs to create more responsive, efficient, and adaptable network environments.
+By tackling these issues, PingPilot has the ability to expand from a gaming-focused solution to a diverse technology with applications in ***network management and optimization***. Our goal is to continue pushing the boundaries of network performance by combining AI and specialized hardware such as NPUs to create more responsive, efficient, and adaptable network environments.
 
 ## Our Team
 
