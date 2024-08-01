@@ -247,7 +247,10 @@ After training the model we exported it to ONNX (.onnx) model format and quantiz
 
 ## Development Progress: Project Implementation
 
-https://github.com/user-attachments/assets/47770b3b-4eb0-480f-995b-abeb4d8b19a0
+
+
+https://github.com/user-attachments/assets/acdb36dd-c202-4e69-b44e-286f5f522556
+
 
 <hr>
 
