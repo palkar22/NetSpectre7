@@ -65,7 +65,7 @@ Our project is built on the smooth integration of powerful machine learning algo
 
 We conducted significant research on existing packet prioritization strategies. This included research into Quality of Service (QoS) protocols, traffic shaping techniques, and machine learning methods to network management. Our findings demonstrated the potential of deep learning for real-time packet classification.
 
-==AI Model Design and Training:== Based on our findings, we created an LSTM RNN (recurrent neural network) model for packet prioritization. The model design is defined in the PacketPrioritizer class.
+== AI Model Design and Training: == Based on our findings, we created an LSTM RNN (recurrent neural network) model for packet prioritization. The model design is defined in the PacketPrioritizer class.
 
 '''python 
 
