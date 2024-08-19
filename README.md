@@ -310,7 +310,6 @@ Optimizing PingPilot for ***cloud gaming systems*** can improve streaming qualit
 
 Adapting technology to VR/AR/Metaverse applications with high bandwidth and low latency can enhance user experience.
 
-PingPilot uses the MIT Licence, an open-source licence with the utmost freedoms to read, modify and redistribute the source code, to encourage community collaboration and accelerate adoption across many platforms and use cases.
 
 By tackling these issues, PingPilot has the ability to expand from a gaming-focused solution to a diverse technology with applications in ***network management and optimization***. Our goal is to continue pushing the boundaries of network performance by combining AI and specialized hardware such as NPUs to create more responsive, efficient, and adaptable network environments.
 
