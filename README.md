@@ -3,7 +3,6 @@
 
 PingPilot is a desktop app designed to speed up your online gaming experience by using ML models that processes packets, only using the NPU.
 
-This project is made for the 2024 AMD Pervasive AI Developer Contest, for AMD Ryzen AI Processors.
 <br>
 
 <img align="right" width="370" height="290" src=https://github.com/user-attachments/assets/71142e5b-bce9-435d-bb1a-425f585c792e>
@@ -12,9 +11,8 @@ This project is made for the 2024 AMD Pervasive AI Developer Contest, for AMD Ry
 <hr>
 
 ### Hardware components
-	
-1. Minisforum Venus UM790 Pro with AMD Ryzen™ 9
-2. NVIDIA GeForce RTX 3070 Laptop GPU
+
+1. NVIDIA GeForce RTX 3070 Laptop GPU
 
 ### Software apps and online services
 
