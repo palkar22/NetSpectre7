@@ -267,8 +267,6 @@ We've successfully implemented two of the three main components of PingPilot:
 
 The Packet Scheduler component is currently a work in progress. This crucial piece will use the AI model's output to dynamically reorder packets, optimizing game traffic flow.
 
-Unfortunately, due to several technical difficulties that resulted from implementing it on our Windows-based host system, we could not complete development of the Packet Scheduler before the deadline 😭.
-
 ## Development Progress: Project Validation
 
 <hr>
