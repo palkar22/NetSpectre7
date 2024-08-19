@@ -22,7 +22,7 @@ PingPilot is a desktop app designed to speed up your online gaming experience by
 
 ## About our project
 <hr>
-PingPilot is a desktop program that optimizes online gaming performance by using machine learning (ML) to prioritize network packets. PingPilot, created for the 2024 AMD Pervasive AI Developer Contest, takes advantage of AMD Ryzen AI's advanced capabilities, including a Neural Processing Unit (NPU) built into the processor, to achieve efficient and effective packet management by optimizing packet prioritization. The goal is to reduce latency and improve the overall gaming experience.
+PingPilot is a desktop program that optimizes online gaming performance by using machine learning (ML) to prioritize network packets. PingPilot, takes advantage of AMD Ryzen AI's advanced capabilities, including a Neural Processing Unit (NPU) built into the processor, to achieve efficient and effective packet management by optimizing packet prioritization. The goal is to reduce latency and improve the overall gaming experience.
 
 ## Objectives of PingPilot
 <hr>
