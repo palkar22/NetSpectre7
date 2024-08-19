@@ -319,10 +319,10 @@ By tackling these issues, PingPilot has the ability to expand from a gaming-focu
 
 <hr>
 
-- Sneha Venkatesh
 - Raghuram Sivakumar
-- Amithav Mrithyunjay
 - Adithya Sunil
+- N Palani Karthik
+- Gautham U S
 
 
 
