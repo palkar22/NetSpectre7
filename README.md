@@ -80,6 +80,7 @@ We conducted significant research on existing packet prioritization strategies. 
         x = self.relu(self.fc1(lstm_out[:, -1, :]))
         return self.fc2(x)
 '''
+
 This model takes sequences of packet features as input and outputs priority classifications. We implemented a packet capture function to collect training data:
 
 '''python 
@@ -108,6 +109,7 @@ This model takes sequences of packet features as input and outputs priority clas
 
     return np.array(features_list), labels
 '''
+
 The training dataset is then exported to .pt file. Using this dataset, we then trained the model with PyTorch, employing a variety of network traffic scenarios to ensure strong performance.
 
 The model was trained and saved as .pth file. We made use of NVIDIA CUDA Acceleration to train this PyTorch model for 50 epochs quickly.
@@ -154,6 +156,7 @@ The model was trained and saved as .pth file. We made use of NVIDIA CUDA Acceler
     dataset = TensorDataset(X, y_classes)
     return DataLoader(dataset, batch_size=128, shuffle=True, pin_memory=True, num_workers=4)
 '''
+
 
 After training the model we exported it to ONNX (.onnx) model format and quantized it to INT8 for running the model on the AMD Ryzen AI NPU.
 
